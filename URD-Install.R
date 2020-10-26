@@ -14,8 +14,12 @@ if (as.numeric(R.version$major) <= 3 && as.numeric(R.version$minor) < 5) {
     install.packages("BiocManager")
   }
   message("Installing required packages from Bioconductor (BiocManager).")
-  BiocManager::install(c('Biobase', 'S4Vectors', 'AnnotationDbi', 'destiny'), suppressUpdates=T)
+  BiocManager::install(c('Biobase', 'S4Vectors', 'AnnotationDbi', 'destiny', 'future.apply'), suppressUpdates=T)
 }
+
+if (!requireNamespace("future", quietly = TRUE)) {
+  message("Installing required packages from CRAN")
+  install.packages("future", "future.apply"))}
 
 # Check that Bioconductor installation went smoothly.
 if (!requireNamespace("Biobase", quietly = TRUE)) {stop("Failed to install required package 'Biobase' from Bioconductor.")}
