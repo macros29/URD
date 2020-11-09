@@ -190,7 +190,8 @@ pseudotimeWeightTransitionMatrix <- function(object, pseudotime, x0=NULL, k=NULL
 #' object <- processRandomWalks(object, walks = these.walks, walks.name = "10", verbose = F)
 #'
 #' @export
-simulateRandomWalk <- function(start.cells, transition.matrix, end.cells, n=10000, end.visits=1, random.seed = 1, verbose.freq=0, max.steps=5000) {
+simulateRandomWalk <- function(start.cells, transition.matrix, end.cells, n_thread = NULL, n=10000, end.visits=1, random.seed = 1, verbose.freq=0, max.steps=5000) {
+  if(is.null(n_thread)) n_thread <- future::availableCores() - 1
   future::plan("multisession", workers = n_thread)
   future.apply::future_lapply(1:n, future.seed = random.seed, function(i) {
     # Initialize with a starting cell from start.cell.list

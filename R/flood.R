@@ -83,9 +83,9 @@ floodPseudotimeCalc <- function(start.cells, minimum.cells.flooded=2, tm.flood=N
     if ((verbose.freq > 0) && (i %% verbose.freq == 0)) print(paste("Flooding, step", i, "-", paste0(round(length(cells.visited) / total.cells * 100, digits=1), "%:"), length(cells.visited), "of", total.cells, "cells visited."))
     # Calculate visitation probability for each cell
     # visitation.prob <- apply(tm.flood[cells.not.visited,cells.visited, drop=F], 1, combine.probs)
-    tmp <- tm.flood[cells.not.visited,cells.visited, drop=T]
+    tmp <- tm.flood[ cells.not.visited, cells.visited, drop=T]
     visitation.prob <- rep(0, nrow(tmp))
-    visitation.prob[sort(unique(tmp@i)) + 1] <- sapply(sort(unique(tmp@i)), function(xx) {
+    visitation.prob[ sort(unique(tmp@i)) + 1 ] <- sapply(sort(unique(tmp@i)), function(xx) {
         return(1-prod(1-tmp@x[tmp@i == xx]))
     })
     names(visitation.prob) <- tmp@Dimnames[[1]]
@@ -139,7 +139,7 @@ floodPseudotimeCalc <- function(start.cells, minimum.cells.flooded=2, tm.flood=N
 #' flood.result <- floodPseudotime(object, root.cells = root.cells, n = 10, minimum.cells.flooded = 2, verbose = T, tm.flood=as.matrix(floodBuildTM(object)))
 #'
 #' @export
-floodPseudotime <- function(root.cells, n=20, n_thread=NULL,minimum.cells.flooded=2, tm.flood=NULL, verbose=F, verbose.freq=10) {
+floodPseudotime <- function(root.cells, n=20, n_thread=NULL, minimum.cells.flooded=2, tm.flood=NULL, verbose=F, verbose.freq=10) {
   if (is.null(tm.flood)) stop(paste0(Sys.time(), ": tm.flood not specified. Please calculate tm.flood using floodBuildTM function first."))
   if (!verbose) verbose.freq <- 0
   if (is.null(n_thread)) n_thread <- future::availableCores() - 1

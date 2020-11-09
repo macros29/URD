@@ -111,7 +111,7 @@ treeForceDirectedLayout <- function(object, num.nn=NULL, dim = 2, method=c("fr",
   duped <- which(duplicated(walk.data))
   if (length(duped) > 0 && remove.duplicate.cells) {
     warning(length(duped), " cells have duplicate random walk coordinates and are being removed from the layout.")
-    walk.data <- dplyr::distinct(walk.data)
+    walk.data <- walk.data[-duped,]
   } else if (length(duped) > 0) {
     warning(length(duped), " cells have duplicate random walk coordinates. This may cause a problem in the layout. If so, set remove.duplicate.cells=T")
   }
