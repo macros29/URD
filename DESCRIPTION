@@ -1,6 +1,6 @@
 Package: futureURD
 Title: futureURD
-Version: 1.1.2
+Version: 0.1
 Authors@R: person("Jeffrey", "Farrell", email = "jeffrey.farrell@nih.gov", role = c("aut", "cre"))
 Description: URD reconstructs transcriptional trajectories underlying specification or differentiation processes in the form of a branching tree from single-cell RNAseq data.
 Depends:
